@@ -2,10 +2,11 @@
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.20'
     repositories {
         google()
         mavenCentral()
+        maven { url "https://android-sdk.payfort.com" }
     }
 
     dependencies {
@@ -26,7 +27,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.vvvirani.amazon_payfort'
+    namespace 'com.amazon.payfort'
     compileSdkVersion 34
 
     compileOptions {
@@ -43,13 +44,14 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation("com.amazon:fortpayment:+:release@aar"){
+    implementation "androidx.work:work-runtime-ktx:2.8.1"
+    implementation("com.amazon:fortpayment:2.1.1:release@aar"){
         transitive = true
     }
 }
