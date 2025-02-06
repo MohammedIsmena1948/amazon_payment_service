@@ -28,7 +28,7 @@ class FlutterAmazonpaymentservices {
     final LinkedHashMap<Object?, Object?> result =
     await _channel.invokeMethod("normalPay", {
       "isShowResponsePage": isShowResponsePage,
-      "environmentType": environmentType.value.name,
+      "environmentType": describeEnum(environmentType),
       "requestParam": request,
     });
     return result;
@@ -40,7 +40,7 @@ class FlutterAmazonpaymentservices {
       ) async {
     final LinkedHashMap<Object?, Object?> result = await _channel.invokeMethod(
         "validateApi", {
-      "environmentType": environmentType.value.name,
+      "environmentType": describeEnum(environmentType),
       "requestParam": request
     });
     return result;
