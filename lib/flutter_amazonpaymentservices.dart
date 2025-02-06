@@ -1,10 +1,9 @@
+// lib/flutter_amazonpaymentservices.dart
 
 import 'dart:async';
 import 'dart:collection';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
 import 'environment_type.dart';
 
 class FlutterAmazonpaymentservices {
@@ -21,29 +20,28 @@ class FlutterAmazonpaymentservices {
   }
 
   static Future<LinkedHashMap<Object?, Object?>> normalPay(
-      Map request,
-      EnvironmentType environmentType, {
-        bool isShowResponsePage = true,
-      }) async {
+    Map request,
+    EnvironmentType environmentType, {
+    bool isShowResponsePage = true,
+  }) async {
     final LinkedHashMap<Object?, Object?> result =
-    await _channel.invokeMethod("normalPay", {
+        await _channel.invokeMethod("normalPay", {
       "isShowResponsePage": isShowResponsePage,
-      "environmentType": describeEnum(environmentType),
+      "environmentType": environmentType.name, // Using .name instead of describeEnum
       "requestParam": request,
     });
     return result;
   }
 
   static Future<LinkedHashMap<Object?, Object?>> validateApi(
-      Map request,
-      EnvironmentType environmentType,
-      ) async {
-    final LinkedHashMap<Object?, Object?> result = await _channel.invokeMethod(
-        "validateApi", {
-      "environmentType": describeEnum(environmentType),
+    Map request,
+    EnvironmentType environmentType,
+  ) async {
+    final LinkedHashMap<Object?, Object?> result = 
+        await _channel.invokeMethod("validateApi", {
+      "environmentType": environmentType.name, // Using .name instead of describeEnum
       "requestParam": request
     });
     return result;
   }
-
 }
