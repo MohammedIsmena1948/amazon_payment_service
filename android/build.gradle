@@ -1,61 +1,48 @@
 // group 'com.vvvirani.amazon_payfort'
 version '1.0-SNAPSHOT'
-
 buildscript {
-    ext.kotlin_version = '1.8.20' // Updated Kotlin version for better SDK 34 compatibility
+    ext.kotlin_version = '1.7.20'
     repositories {
         google()
         mavenCentral()
-        maven { 
-            url "https://raw.githubusercontent.com/Payfort/fort-android-sdk/master/releases"
-        }
+        maven { url "https://android-sdk.payfort.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2' // Updated gradle plugin
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
 rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { 
-            url "https://raw.githubusercontent.com/Payfort/fort-android-sdk/master/releases"
-        }
+        maven { url "https://android-sdk.payfort.com" }
     }
 }
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 android {
     namespace 'com.amazon.payfort'
-    compileSdkVersion 34 // Updated to SDK 34
-    
+    compileSdkVersion 33
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-    
     defaultConfig {
-        targetSdkVersion 34 // Updated to SDK 34
+        targetSdkVersion 33
         minSdkVersion 21
     }
 }
-
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.work:work-runtime-ktx:2.8.1"
-    implementation('com.amazon:fortpayment:2.1.0:release@aar') { // Downgraded to 2.1.0 for stability
+    implementation("com.amazon:fortpayment:2.1.0:release@aar"){
         transitive = true
     }
 }
