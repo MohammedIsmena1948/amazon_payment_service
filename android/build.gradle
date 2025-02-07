@@ -2,14 +2,14 @@ group 'com.vvvirani.amazon_payfort'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'  // Keeping original Kotlin version
+    ext.kotlin_version = '1.7.20'
     repositories {
         google()
-        mavenCentral()  // Replaced jcenter() as specified in PR
+        mavenCentral()
         maven { url "https://android-sdk.payfort.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'  // Keeping original Gradle version
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        mavenCentral()  // Replaced jcenter() as specified in PR
+        mavenCentral()
         maven { url "https://android-sdk.payfort.com" }
     }
 }
@@ -27,33 +27,30 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.amazon.payfort'
-    compileSdkVersion 33  // Keeping at 33 to avoid SDK 34 compatibility issues
-    
+    compileSdkVersion 33
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-    
+
+    kotlinOptions { jvmTarget = '1.8' }
+
+    sourceSets { main.java.srcDirs += 'src/main/kotlin' }
+
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33  // Keeping at 33 to avoid SDK 34 compatibility issues
+        targetSdkVersion 33
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.work:work-runtime-ktx:2.8.1"
-    
-    // Using the specific Payfort SDK version mentioned in PR
+
+    // Exclude WorkManager from PayFort SDK
     implementation("com.amazon:fortpayment:2.1.0:release@aar") {
         transitive = true
+        exclude group: "androidx.work", module: "work-runtime"
     }
 }
