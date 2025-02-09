@@ -51,5 +51,6 @@ dependencies {
     // Exclude WorkManager from PayFort SDK
     implementation("com.amazon:fortpayment:2.1.0:release@aar") {
         transitive = true
+        exclude group: "androidx.work", module: "work-runtime"
     }
 }
