@@ -1,56 +1,45 @@
-// group 'com.vvvirani.amazon_payfort'
-version '1.0-SNAPSHOT'
+group 'com.amazon.flutter_amazonpaymentservices'
+version '1.0'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'
     repositories {
         google()
-        mavenCentral()
+        jcenter()
         maven { url "https://android-sdk.payfort.com" }
+
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        mavenCentral()
+        jcenter()
         maven { url "https://android-sdk.payfort.com" }
+
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.amazon.payfort'
     compileSdkVersion 34
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     defaultConfig {
         minSdkVersion 21
     }
-}
+    dependencies {
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation("com.amazon:fortpayment:2.1.0:release@aar"){
-        transitive = true
+        implementation('com.amazon:fortpayment:+:release@aar') {
+            transitive = true
+        }
     }
 }
