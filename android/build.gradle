@@ -1,4 +1,4 @@
-group 'com.amazon.flutter_amazonpaymentservices'
+
 version '1.0'
 
 buildscript {
